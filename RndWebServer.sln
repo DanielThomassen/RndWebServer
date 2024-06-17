@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RndWebServer", "RndWebServer\RndWebServer.csproj", "{AD43A950-63B2-4366-9E1E-79D5BD01D6C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RndWebServer.Server", "RndWebServer.Server\RndWebServer.Server.csproj", "{FC01C42E-B039-4221-8915-0D01D0E64461}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD43A950-63B2-4366-9E1E-79D5BD01D6C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD43A950-63B2-4366-9E1E-79D5BD01D6C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD43A950-63B2-4366-9E1E-79D5BD01D6C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD43A950-63B2-4366-9E1E-79D5BD01D6C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC01C42E-B039-4221-8915-0D01D0E64461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC01C42E-B039-4221-8915-0D01D0E64461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC01C42E-B039-4221-8915-0D01D0E64461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC01C42E-B039-4221-8915-0D01D0E64461}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
