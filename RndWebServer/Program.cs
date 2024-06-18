@@ -1,3 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using RndWebServer.Server;
 
-Console.WriteLine("Hello, World!");
+var builder = new WebServerBuilder();
+
+builder.AddMiddleware<HelloMiddleWare>();
+
+builder.Services.AddLogging(opt =>
+{
+    opt.AddConsole();
+});
+
+await builder.Build().StartAsync(5001, default);

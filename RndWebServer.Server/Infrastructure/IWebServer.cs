@@ -1,4 +1,4 @@
-﻿namespace RndWebServer.Server;
+﻿namespace RndWebServer.Server.Infrastructure;
 
 public interface IWebServer
 {

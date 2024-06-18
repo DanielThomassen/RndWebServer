@@ -2,7 +2,7 @@
 
 public class WebContext
 {
-    Dictionary<string, string> Headers { get; set; } = new();
+    public Dictionary<string, string> Headers { get; set; } = new();
     
     public string Query { get; internal set; }
     
@@ -11,4 +11,5 @@ public class WebContext
     public string Method { get; internal set; }
     
     public Stream BodyStream { get; internal set; }
+    public long ContentLength { get; internal set; }
 }
