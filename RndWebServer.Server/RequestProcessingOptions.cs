@@ -1,6 +1,6 @@
 ﻿namespace RndWebServer.Server;
 
-public class RequestProcessingOptions
+public sealed class RequestProcessingOptions
 {
     /// <summary>
     /// Enables reading the request body more than once

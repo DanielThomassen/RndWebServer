@@ -1,9 +1,11 @@
 ﻿using System.Text;
+using Microsoft.Extensions.Logging;
 
 namespace RndWebServer.Server.Internal;
 
 internal class HeaderParser
 {
+    private readonly ILogger<HeaderParser> _logger;
     private readonly StringBuilder _keyBuilder = new();
     private readonly StringBuilder _valueBuilder = new();
     private readonly List<KeyValuePair<string, string>> _headers = new();
@@ -15,6 +17,11 @@ internal class HeaderParser
 
     public long Offset { get; private set; } = 0;
     public long WriteOffset { get; private set; } = 0;
+
+    public HeaderParser(ILogger<HeaderParser> logger)
+    {
+        _logger = logger;
+    }
     
     public bool Write(ReadOnlySpan<byte> buffer)
     {
@@ -91,6 +98,7 @@ internal class HeaderParser
         }
         
         _headers.Add(new KeyValuePair<string, string>(key, val));
+        _logger.LogDebug("Header: {Key}: {Value}", key, val);
         _keyBuilder.Clear();
         _valueBuilder.Clear();
     }

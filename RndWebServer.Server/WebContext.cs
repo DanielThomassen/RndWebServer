@@ -1,6 +1,8 @@
-﻿namespace RndWebServer.Server;
+﻿using System.Collections.Specialized;
 
-public class WebContext
+namespace RndWebServer.Server;
+
+public sealed class WebContext
 {
     public Dictionary<string, string> Headers { get; set; } = new();
     
@@ -12,4 +14,5 @@ public class WebContext
     
     public Stream BodyStream { get; internal set; }
     public long ContentLength { get; internal set; }
+    public NameValueCollection QueryParams { get; set; } = null!;
 }

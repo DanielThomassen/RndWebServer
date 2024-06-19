@@ -4,7 +4,7 @@ using RndWebServer.Server.Infrastructure;
 
 namespace RndWebServer.Server.Internal;
 
-internal class WebResponse : IWebResponse
+internal sealed class WebResponse : IWebResponse
 {
     private readonly Socket _socket;
     private bool _writeStarted;

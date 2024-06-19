@@ -11,6 +11,10 @@ public static class RequestStreamHelper
         {
             return new RequestStream(socket, contentLength);
         }
+        else
+        {
+            throw new NotImplementedException("Not yet supported");
+        }
 
         return null!;
     }

@@ -1,22 +1,30 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using RndWebServer.Server.Infrastructure;
+using RndWebServer.Server.Internal;
 
 namespace RndWebServer.Server;
 
-public class WebServerBuilder
+public sealed class WebServerBuilder
 {
     public ServiceCollection Services { get; } = new();
+
+    public WebServerBuilder()
+    {
+        Services.AddTransient<HeaderParser>();
+        Services.AddSingleton<IWebServer, Internal.RndWebServer>();
+        Services.AddSingleton<RouteProvider>();
+        AddMiddleware<QueryStringMiddleware>();
+        AddMiddleware<RoutingMiddleware>();
+    }
     
     public IWebServer Build()
     {
         var services = Services.BuildServiceProvider();
-        var server = new Internal.RndWebServer(services, services.GetRequiredService<ILogger<Internal.RndWebServer>>());
-        return server;
+        return services.GetRequiredService<IWebServer>();
     }
     
-    public void AddMiddleware<T>() where T : class, IWeberverMiddleWare
+    public void AddMiddleware<T>() where T : class, IWebserverMiddleWare
     {
-        Services.AddSingleton<IWeberverMiddleWare, T>();
+        Services.AddSingleton<IWebserverMiddleWare, T>();
     }
 }

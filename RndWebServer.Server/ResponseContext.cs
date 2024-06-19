@@ -2,7 +2,7 @@
 
 namespace RndWebServer.Server;
 
-public class ResponseContext
+public sealed class ResponseContext
 {
     public IWebResponse Response { get; }
 
