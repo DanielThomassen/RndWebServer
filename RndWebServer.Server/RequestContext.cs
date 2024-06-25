@@ -2,7 +2,7 @@
 
 namespace RndWebServer.Server;
 
-public sealed class WebContext
+public sealed class RequestContext
 {
     public Dictionary<string, string> Headers { get; set; } = new();
     

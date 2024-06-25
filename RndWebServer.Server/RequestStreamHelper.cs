@@ -68,9 +68,10 @@ public static class RequestStreamHelper
         }
     }
 
-    private class RequestStream : Stream
+    internal class RequestStream : Stream
     {
         private readonly Socket _socket;
+        public long BytesRead { get; private set; }
 
         public RequestStream(Socket socket, long contentLength)
         {
@@ -86,7 +87,9 @@ public static class RequestStreamHelper
         public override int Read(byte[] buffer, int offset, int count)
         {
             var b = buffer[offset..(offset + count)].AsSpan();
-            return _socket.Receive(b);
+            var bytesRead = _socket.Receive(b);
+            BytesRead += bytesRead;
+            return bytesRead;
         }
 
         public override long Seek(long offset, SeekOrigin origin)

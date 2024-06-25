@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace RndWebServer.Server.Internal;
 
-internal class HeaderParser
+internal sealed class HeaderParser
 {
     private readonly ILogger<HeaderParser> _logger;
     private readonly StringBuilder _keyBuilder = new();

@@ -67,7 +67,6 @@ internal sealed class WebResponse : IWebResponse
             await WriteHeadersAsync();
         }
         _writeStarted = true;
-        Console.WriteLine(Encoding.UTF8.GetString(buffer), buffer.Length);
         var result = await _socket.SendAsync(buffer, SocketFlags.None, cancellationToken);
         _socket.Send("\r\n"u8, SocketFlags.None);
         
@@ -97,12 +96,9 @@ internal sealed class WebResponse : IWebResponse
             return;
         }
 
-        Console.WriteLine("Sending headers");
-        Console.WriteLine(Encoding.UTF8.GetString(_statusCodes[StatusCode]));
         await _socket.SendAsync(_statusCodes[StatusCode], SocketFlags.None);
         foreach (var (key, value) in _headers)
         {
-            Console.WriteLine($"{key}: {value}\r\n");
             await _socket.SendAsync(Encoding.UTF8.GetBytes($"{key}: {value}\r\n"), SocketFlags.None);
         }
         _socket.Send("\r\n"u8, SocketFlags.None);

@@ -8,7 +8,7 @@ internal sealed class QueryStringMiddleware : IWebserverMiddleWare
 {
     private static readonly NameValueCollection Empty = new ();
     
-    public Task ProcessAsync(WebContext context, ResponseContext responseContext, CancellationToken cancellationToken)
+    public Task ProcessAsync(RequestContext context, ResponseContext responseContext, CancellationToken cancellationToken)
     {
         var index = context.Path.IndexOf('?');
         if (index == -1)

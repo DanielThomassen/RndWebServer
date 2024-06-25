@@ -2,7 +2,7 @@
 
 public interface IWebserverMiddleWare
 {
-    Task ProcessAsync(WebContext context, ResponseContext responseContext,CancellationToken cancellationToken);
+    Task ProcessAsync(RequestContext context, ResponseContext responseContext,CancellationToken cancellationToken);
 
     public void Configure(RequestProcessingOptions options);
 }

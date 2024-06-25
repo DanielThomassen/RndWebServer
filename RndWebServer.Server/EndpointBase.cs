@@ -6,7 +6,7 @@ namespace RndWebServer.Server;
 public abstract class EndpointBase : IEndpoint
 {
     public IWebResponse Response { get; internal set; } = null!;
-    public WebContext Request { get; internal set; } = null!;
+    public RequestContext Request { get; internal set; } = null!;
     
     public virtual Task ProcessPost()
     {

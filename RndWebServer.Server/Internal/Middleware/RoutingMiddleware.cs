@@ -15,7 +15,7 @@ public class RoutingMiddleware : IWebserverMiddleWare
         _serviceProvider = serviceProvider;
     }
     
-    public Task ProcessAsync(WebContext context, ResponseContext responseContext, CancellationToken cancellationToken)
+    public Task ProcessAsync(RequestContext context, ResponseContext responseContext, CancellationToken cancellationToken)
     {
         var endpoint = _routeProvider.GetRoute(context.Path[1..], _serviceProvider);
         endpoint.Request = context;

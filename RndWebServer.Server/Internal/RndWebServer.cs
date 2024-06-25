@@ -56,7 +56,7 @@ internal sealed class RndWebServer : IWebServer
 
                     var httpInfoLine = headerParser.Headers[0].Key.Split(' ', 3);
 
-                    var context = new WebContext
+                    var context = new RequestContext
                     {
                         Method = httpInfoLine[0].ToUpper().Trim(),
                         Path = httpInfoLine[1],
@@ -82,6 +82,11 @@ internal sealed class RndWebServer : IWebServer
                             break;
                         }
                     }
+
+                    if (((RequestStreamHelper.RequestStream)context.BodyStream).BytesRead != context.ContentLength)
+                    {
+                        await FinishReadingRequest(context, connection);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -92,6 +97,31 @@ internal sealed class RndWebServer : IWebServer
                     connection.Close();
                 }
             }, cancellationToken);
+        }
+    }
+
+    private static async Task FinishReadingRequest(RequestContext context, Socket connection)
+    {
+        var toRead = context.ContentLength - ((RequestStreamHelper.RequestStream)context.BodyStream).BytesRead;
+        var buffer = new byte[connection.ReceiveBufferSize];
+        await connection.ReceiveAsync(buffer, SocketFlags.None);
+        while (toRead > 0)
+        {
+            try
+            {
+                using var cts = new CancellationTokenSource();
+                cts.CancelAfter(50);
+                var read = await connection.ReceiveAsync(buffer, SocketFlags.None, cts.Token);
+                if (read == 0)
+                {
+                    break;
+                }
+                toRead -= read;
+            }
+            catch (OperationCanceledException)
+            {
+                break;
+            }
         }
     }
 
@@ -119,7 +149,7 @@ internal sealed class RndWebServer : IWebServer
 
 public sealed class WebServerConfigurationBuilder
 {
-    public IServiceProvider Services { get; init; }
+    public IServiceProvider Services { get; init; } = null!;
 
     internal WebServerConfigurationBuilder()
     {

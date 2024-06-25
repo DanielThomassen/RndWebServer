@@ -13,5 +13,9 @@ public class IndexRoute : EndpointBase
         }
         await Ok($"Hello {name}!");
     }
-    
+
+    public override Task ProcessPost()
+    {
+        return ProcessGet();
+    }
 }
